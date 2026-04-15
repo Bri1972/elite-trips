@@ -500,6 +500,139 @@
   object-position: center 20%;
   display: block;
 }
+    /* Chat Widget */
+#chat-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  z-index: 1000;
+  transition: background 200ms;
+}
+#chat-launcher:hover { background: var(--color-gold-hover); }
+#chat-launcher svg { width: 26px; height: 26px; fill: #fff; }
+
+#chat-widget {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  height: 500px;
+  max-height: calc(100vh - 120px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+  overflow: hidden;
+}
+#chat-widget.open { display: flex; }
+
+#chat-header {
+  background: var(--color-surface-navy);
+  color: var(--color-text-inverse);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+#chat-header p { margin: 0; font-size: 0.85rem; opacity: 0.7; margin-top: 2px; }
+#chat-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+#chat-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  opacity: 0.7;
+  line-height: 1;
+  padding: 0;
+}
+#chat-close:hover { opacity: 1; }
+
+#chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-msg {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  word-wrap: break-word;
+}
+.chat-msg.assistant {
+  background: var(--color-gold-light);
+  color: var(--color-text);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+.chat-msg.user {
+  background: var(--color-surface-navy);
+  color: var(--color-text-inverse);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.chat-msg.typing { opacity: 0.6; font-style: italic; }
+
+#chat-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--color-divider);
+  flex-shrink: 0;
+}
+#chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+}
+#chat-input:focus { border-color: var(--color-gold); }
+#chat-send {
+  background: var(--color-gold);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 200ms;
+}
+#chat-send:hover { background: var(--color-gold-hover); }
+#chat-send svg { width: 18px; height: 18px; fill: #fff; }
   </style>
 </head>
 <body>
@@ -837,5 +970,97 @@ form.addEventListener('submit', function(event) {
       }
     })();
   </script>
+  <button id="chat-launcher" aria-label="Open chat assistant">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+  </svg>
+</button>
+
+<div id="chat-widget" role="dialog" aria-label="Elite Tripps chat assistant">
+  <div id="chat-header">
+    <div>
+      <h3>Elite Tripps</h3>
+      <p>Your personal travel advisor</p>
+    </div>
+    <button id="chat-close" aria-label="Close chat">&#x2715;</button>
+  </div>
+  <div id="chat-messages" aria-live="polite"></div>
+  <form id="chat-form" autocomplete="off">
+    <input
+      type="text"
+      id="chat-input"
+      placeholder="Ask me anything about your trip..."
+      aria-label="Chat message"
+      required
+    />
+    <button type="submit" id="chat-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<script>
+  const BACKEND_URL = 'https://YOUR-RENDER-URL.onrender.com/chat';
+
+  const launcher = document.getElementById('chat-launcher');
+  const widget = document.getElementById('chat-widget');
+  const closeBtn = document.getElementById('chat-close');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const messages = document.getElementById('chat-messages');
+
+  function addMessage(role, text) {
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + role;
+    div.textContent = text;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+    return div;
+  }
+
+  function showWelcome() {
+    if (messages.children.length === 0) {
+      addMessage('assistant', "Hi! I'm your Elite Tripps travel advisor. Whether you're dreaming of a cruise, an all-inclusive getaway, or a group trip, I'm here to help. What are you thinking about?");
+    }
+  }
+
+  launcher.addEventListener('click', () => {
+    widget.classList.add('open');
+    launcher.style.display = 'none';
+    showWelcome();
+    input.focus();
+  });
+
+  closeBtn.addEventListener('click', () => {
+    widget.classList.remove('open');
+    launcher.style.display = 'flex';
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage('user', text);
+    input.value = '';
+
+    const typing = addMessage('assistant typing', 'Typing...');
+
+    try {
+      const res = await fetch(BACKEND_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+      const data = await res.json();
+      typing.remove();
+      addMessage('assistant', data.reply);
+    } catch (err) {
+      typing.remove();
+      addMessage('assistant', 'Sorry, something went wrong. Please try again in a moment.');
+    }
+  });
+</script>
 </body>
 </html>
