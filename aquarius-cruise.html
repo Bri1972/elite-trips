@@ -1093,6 +1093,35 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+<div id="chat-launcher" aria-label="Open chat with Brielle">
+  <img src="brielle.png" alt="Chat with Brielle">
+</div>
 
+<div id="chat-widget" role="dialog" aria-label="Elite Tripps chat assistant">
+  <div id="chat-header">
+    <div>
+      <h3>Brielle</h3>
+      <p>Elite Tripps Virtual Assistant</p>
+    </div>
+    <button id="chat-close" aria-label="Close chat">&times;</button>
+  </div>
+
+  <div id="chat-messages" aria-live="polite"></div>
+
+  <form id="chat-form" autocomplete="off">
+    <input
+      type="text"
+      id="chat-input"
+      placeholder="Ask me anything about your trip..."
+      aria-label="Chat message"
+      required
+    />
+    <button type="submit" id="chat-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </form>
+</div>
 </body>
 </html>
