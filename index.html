@@ -18,7 +18,27 @@
       --color-surface-offset: #f2ece0;
       --color-surface-navy: #13213a;
       --color-surface-navy-2: #0e1a2f;
-      --color-divider: #e0d8cb;
+      --color-divider: #e0d8cb;#chat-widget {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  height: 500px;
+  max-height: calc(100vh - 120px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+  overflow: hidden;
+}
+
+#chat-widget.open {
+  display: flex;
+}
       --color-border: #d8cfc0;
       --color-text: #1a1611;
       --color-text-muted: #6b6257;
@@ -1014,20 +1034,21 @@ form.addEventListener('submit', function(event) {
       }
     })();
   </script>
-  <div id="chat-launcher" aria-label="Open chat with Brielle">
-  <img src="brielle.png" alt="Chat with Brielle">
+ <div id="chat-launcher" aria-label="Open chat with Brielle">
+  <img src="Brielle.png" alt="Chat with Brielle">
 </div>
+
 <div id="chat-widget" role="dialog" aria-label="Elite Tripps chat assistant">
   <div id="chat-header">
-  <div>
-    <h3>Brielle</h3>
-    <p>Elite Tripps Virtual Assistant</p>
+    <div>
+      <h3>Brielle</h3>
+      <p>Elite Tripps Virtual Assistant</p>
+    </div>
+    <button id="chat-close" aria-label="Close chat">&times;</button>
   </div>
-  <button id="chat-close" aria-label="Close chat">&times;</button>
-</div>
-    <button id="chat-close" aria-label="Close chat">&#x2715;</button>
-  </div>
+
   <div id="chat-messages" aria-live="polite"></div>
+
   <form id="chat-form" autocomplete="off">
     <input
       type="text"
@@ -1043,7 +1064,6 @@ form.addEventListener('submit', function(event) {
     </button>
   </form>
 </div>
-
 <script>
   const BACKEND_URL = 'https://YOUR-RENDER-URL.onrender.com/chat';
 
