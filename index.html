@@ -518,8 +518,33 @@
   z-index: 1000;
   transition: background 200ms;
 }
-#chat-launcher:hover { background: var(--color-gold-hover); }
-#chat-launcher svg { width: 26px; height: 26px; fill: #fff; }
+#chat-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1000;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 0 12px rgba(184,146,74,0.4);
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chat-launcher:hover {
+  box-shadow: 0 0 16px rgba(184,146,74,0.6);
+}
+
+#chat-launcher img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 #chat-widget {
   position: fixed;
@@ -538,7 +563,10 @@
   z-index: 999;
   overflow: hidden;
 }
-#chat-widget.open { display: flex; }
+
+#chat-widget.open {
+  display: flex;
+}
 
 #chat-header {
   background: var(--color-surface-navy);
@@ -549,7 +577,14 @@
   justify-content: space-between;
   flex-shrink: 0;
 }
-#chat-header p { margin: 0; font-size: 0.85rem; opacity: 0.7; margin-top: 2px; }
+
+#chat-header p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
 #chat-header h3 {
   font-family: var(--font-display);
   font-size: 1.15rem;
@@ -557,6 +592,7 @@
   margin: 0;
   letter-spacing: 0.04em;
 }
+
 #chat-close {
   background: none;
   border: none;
@@ -567,7 +603,10 @@
   line-height: 1;
   padding: 0;
 }
-#chat-close:hover { opacity: 1; }
+
+#chat-close:hover {
+  opacity: 1;
+}
 
 #chat-messages {
   flex: 1;
@@ -577,6 +616,7 @@
   flex-direction: column;
   gap: 10px;
 }
+
 .chat-msg {
   max-width: 82%;
   padding: 10px 14px;
@@ -585,19 +625,25 @@
   line-height: 1.55;
   word-wrap: break-word;
 }
+
 .chat-msg.assistant {
   background: var(--color-gold-light);
   color: var(--color-text);
   align-self: flex-start;
   border-bottom-left-radius: 4px;
 }
+
 .chat-msg.user {
   background: var(--color-surface-navy);
   color: var(--color-text-inverse);
   align-self: flex-end;
   border-bottom-right-radius: 4px;
 }
-.chat-msg.typing { opacity: 0.6; font-style: italic; }
+
+.chat-msg.typing {
+  opacity: 0.6;
+  font-style: italic;
+}
 
 #chat-form {
   display: flex;
@@ -606,6 +652,7 @@
   border-top: 1px solid var(--color-divider);
   flex-shrink: 0;
 }
+
 #chat-input {
   flex: 1;
   padding: 10px 14px;
@@ -617,7 +664,11 @@
   color: var(--color-text);
   outline: none;
 }
-#chat-input:focus { border-color: var(--color-gold); }
+
+#chat-input:focus {
+  border-color: var(--color-gold);
+}
+
 #chat-send {
   background: var(--color-gold);
   border: none;
@@ -631,8 +682,16 @@
   flex-shrink: 0;
   transition: background 200ms;
 }
-#chat-send:hover { background: var(--color-gold-hover); }
-#chat-send svg { width: 18px; height: 18px; fill: #fff; }
+
+#chat-send:hover {
+  background: var(--color-gold-hover);
+}
+
+#chat-send svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
   </style>
 </head>
 <body>
@@ -970,12 +1029,9 @@ form.addEventListener('submit', function(event) {
       }
     })();
   </script>
-  <button id="chat-launcher" aria-label="Open chat assistant">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
-  </svg>
-</button>
-
+  <div id="chat-launcher" aria-label="Open chat with Brielle">
+  <img src="brielle.png" alt="Chat with Brielle">
+</div>
 <div id="chat-widget" role="dialog" aria-label="Elite Tripps chat assistant">
   <div id="chat-header">
     <div>
