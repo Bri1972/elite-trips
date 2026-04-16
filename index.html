@@ -501,23 +501,7 @@
   display: block;
 }
     /* Chat Widget */
-#chat-launcher {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--color-gold);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-  z-index: 1000;
-  transition: background 200ms;
-}
+/* Chat Widget */
 #chat-launcher {
   position: fixed;
   bottom: 24px;
@@ -544,6 +528,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 #chat-widget {
@@ -1034,10 +1019,12 @@ form.addEventListener('submit', function(event) {
 </div>
 <div id="chat-widget" role="dialog" aria-label="Elite Tripps chat assistant">
   <div id="chat-header">
-    <div>
-      <h3>Elite Tripps</h3>
-      <p>Your personal travel advisor</p>
-    </div>
+  <div>
+    <h3>Brielle</h3>
+    <p>Elite Tripps Virtual Assistant</p>
+  </div>
+  <button id="chat-close" aria-label="Close chat">&times;</button>
+</div>
     <button id="chat-close" aria-label="Close chat">&#x2715;</button>
   </div>
   <div id="chat-messages" aria-live="polite"></div>
