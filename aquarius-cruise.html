@@ -1181,57 +1181,76 @@
         <input type="hidden" name="trip_dates" value="Feb 7–14, 2027">
 
         <div class="form-grid">
-          <div class="form-group">
-                <label for="first-name">First Name (as it appears on your valid travel document)</label>
-                <input type="text" id="first-name" name="first-name" placeholder="Your first name" autocomplete="given-name" required>
-              </div>
-              <div class="form-group">
-                <label for="last-name">Last Name (as it appears on your valid travel document)</label>
-                <input type="text" id="last-name" name="last-name" placeholder="Your last name" autocomplete="family-name" required>
-              </div>
-              <div class="form-group form-group--full">
-                <label for="email">Best Email</label>
-                <input type="email" id="email" name="email" placeholder="email@example.com" autocomplete="email" required>
-              </div>
-              <div class="form-group form-group--full">
-                <label for="travelers">Who's Coming</label>
-                <select id="travelers" name="travelers">
-                  <option value="">Select an option</option>
-                  <option>Just me (solo)</option>
-                  <option>Me and one other (couple or friends)</option>
-                  <option>Group of 3 or more</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
-              <div class="form-group form-group--full">
-                <label for="cabin-count">How Many Cabins</label>
-                <select id="cabin-count" name="cabin-count">
-                  <option value="">Select an option</option>
-                  <option>1 cabin</option>
-                  <option>2 cabins</option>
-                  <option>3 cabins</option>
-                  <option>4 or more cabins</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
-              <div class="form-group form-group--full">
-                <label for="payment-plan">Payment Plan Interest</label>
-                <select id="payment-plan" name="payment-plan">
-                  <option value="">Select an option</option>
-                  <option>I want to pay in full</option>
-                  <option>I'm interested in a payment plan</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
-              <div class="form-group form-group--full">
-                <label for="notes">Anything Else</label>
-                <textarea id="notes" name="notes" placeholder="Solo traveler needing roommate match? Special occasion? Any questions? This is your space."></textarea>
-              </div>
-              <div class="form-submit">
-                <button type="submit" class="btn-gold">Start My Booking</button>
-                <p>No commitment yet. I'll be in touch within 48 hours.</p>
-              </div>
-            </div>
+
+  <div class="form-group">
+    <label for="first-name">First Name (as it appears on your valid travel document)</label>
+    <input type="text" id="first-name" name="first-name" placeholder="Your first name" autocomplete="given-name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="last-name">Last Name (as it appears on your valid travel document)</label>
+    <input type="text" id="last-name" name="last-name" placeholder="Your last name" autocomplete="family-name" required>
+  </div>
+
+  <div class="form-group form-group--full">
+    <label for="email">Best Email</label>
+    <input type="email" id="email" name="email" placeholder="email@example.com" autocomplete="email" required>
+  </div>
+
+  <div class="form-group form-group--full">
+    <label for="cabin-mate">Who will be sharing your cabin with you?</label>
+    <select id="cabin-mate" name="cabin-mate" required>
+      <option value="">Select an option</option>
+      <option>I already have my cabin mate</option>
+      <option>I need help finding a cabin mate</option>
+      <option>I’m not sure yet</option>
+    </select>
+  </div>
+
+  <div class="form-group form-group--full">
+    <label for="cabin-count">How many cabins (2 guests per cabin) would you like to reserve?</label>
+    <select id="cabin-count" name="cabin-count" required>
+      <option value="">Select an option</option>
+      <option>1 cabin (2 guests)</option>
+      <option>2 cabins (4 guests)</option>
+      <option>3+ cabins (group booking)</option>
+      <option>I’m not sure yet</option>
+    </select>
+  </div>
+
+  <div class="form-group form-group--full">
+    <label for="celebration">What are you celebrating on this trip?</label>
+    <select id="celebration" name="celebration">
+      <option value="">Select an option</option>
+      <option>♒ Aquarius Birthday</option>
+      <option>🎉 Birthday (non-Aquarius)</option>
+      <option>💃 Girls trip / just outside</option>
+      <option>🧘🏾‍♀️ I just need a getaway</option>
+      <option>✨ Something else</option>
+    </select>
+  </div>
+
+  <div class="form-group form-group--full">
+    <label for="readiness">Are you ready to secure your cabin?</label>
+    <select id="readiness" name="readiness">
+      <option value="">Select an option</option>
+      <option>Yes, I’m ready to book</option>
+      <option>I’m close, just need a little more info</option>
+      <option>Just exploring right now</option>
+    </select>
+  </div>
+
+  <div class="form-group form-group--full">
+    <label for="notes">Anything I should know?</label>
+    <textarea id="notes" name="notes" placeholder="Cabin mate details, celebration plans, or any quick questions…"></textarea>
+  </div>
+
+  <div class="form-submit">
+    <button type="submit" class="btn-gold">Start My Booking</button>
+    <p>No commitment yet. I’ll review your details and follow up with next steps.</p>
+  </div>
+
+</div>
           </form>
         </div>
       </div>
