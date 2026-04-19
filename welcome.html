@@ -93,8 +93,11 @@
   @media (max-width: 540px) { .upsell-card { grid-template-columns: 1fr; } }
   .upsell-icon { font-size: 2rem; }
   .upsell-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--navy); margin-bottom: 0.35rem; }
-  .upsell-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .upsell-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.85rem; }
   .upsell-card p strong { color: var(--navy); }
+  .upsell-card p:last-child { margin-bottom: 0; font-size: 0.82rem; font-style: italic; }
+  .btn-upsell { display: inline-block; background: var(--navy); color: #fff; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.65rem 1.5rem; border-radius: 6px; transition: background 200ms; }
+  .btn-upsell:hover { background: #0e1a2f; }
 
   .contact-section { background: var(--surface); border-top: 1px solid var(--divider); padding: 2rem 1.5rem; text-align: center; }
   .contact-section p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
@@ -210,8 +213,10 @@
   <div class="upsell-card reveal">
     <div class="upsell-icon">🔒</div>
     <div>
-      <h4>Want Your Own Personal Domain?</h4>
-      <p>If you would prefer <strong>yourname.com</strong> instead of yourname.elitetripps.com — with zero Elite Tripps™ branding in your URL — that is available as a <strong>Custom Domain Upgrade for $297.</strong> Just reply to your purchase confirmation email and I will get you set up.</p>
+      <h4>Your Name. Your Domain. Your Brand. Period.</h4>
+      <p>Your Starter page gives you your own space at yourname.elitetripps.com. But if you are the kind of agent who wants EVERYTHING to carry your name, your URL, your brand, your identity with no one else's name attached, the <strong>Custom Domain Upgrade</strong> is for you. For <strong>$297</strong> I connect your own personal .com and remove every trace of Elite Tripps™ from your URL. This is for the agent who is building something serious.</p>
+      <p>This upgrade can be added any time, now or after your page is live.</p>
+      <a href="YOUR_STAN_STORE_UPGRADE_LINK" class="btn-upsell" target="_blank">Claim My Custom Domain</a>
     </div>
   </div>
 </div>
