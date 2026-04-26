@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -7,258 +8,282 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body { background: #FFF8F3; min-height: 100vh; }
+  html, body { background: #04606B; min-height: 100vh; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position:  200% center; }
-  }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 4px 24px rgba(231,111,81,0.18); }
-    50%       { box-shadow: 0 4px 36px rgba(231,111,81,0.45); }
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background:
-      radial-gradient(ellipse at 20% 0%,   rgba(231,111,81,0.07) 0%, transparent 55%),
-      radial-gradient(ellipse at 80% 100%, rgba(42,157,143,0.06) 0%, transparent 55%),
-      #FFF8F3;
-    color: #2F2A26;
-  }
-
-  .header {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(255,248,243,0.97);
-    border-bottom: 1px solid rgba(231,111,81,0.25);
-    padding: 1.1rem 1.4rem; text-align: center;
-    backdrop-filter: blur(12px);
-  }
-
-  .header-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 7vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  background: linear-gradient(135deg, #E76F51 0%, #f0d882 50%, #E76F51 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 3s linear infinite;
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(22px); }
+to   { opacity: 1; transform: translateY(0); }
 }
-  .header-sub {
-  font-size: 0.95rem;
-  color: #8f7666;
-  margin-top: 0.5rem;
-  line-height: 1.5;
+@keyframes shimmer {
+0%   { background-position: -200% center; }
+100% { background-position:  200% center; }
+}
+@keyframes pulse {
+0%, 100% { box-shadow: 0 4px 24px rgba(242,183,5,0.3); }
+50%       { box-shadow: 0 4px 36px rgba(242,183,5,0.6); }
 }
 
-  .wrapper {
-    max-width: 440px; margin: 0 auto;
-    padding: 1.5rem 1.1rem 3rem;
-    animation: fadeUp 0.4s ease;
-  }
+body {
+font-family: ‘DM Sans’, sans-serif;
+background:
+radial-gradient(ellipse at 20% 0%,   rgba(242,135,5,0.18) 0%, transparent 55%),
+radial-gradient(ellipse at 80% 100%, rgba(3,127,140,0.25) 0%, transparent 55%),
+#04606B;
+color: #FFF8F0;
+}
 
-  .section-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.68rem; letter-spacing: 0.22em;
-    text-transform: uppercase; color: #bbb;
-    text-align: center; margin: 1.4rem 0 1.1rem;
-  }
+.header {
+position: sticky; top: 0; z-index: 20;
+background: rgba(4,96,107,0.97);
+border-bottom: 1px solid rgba(242,183,5,0.3);
+padding: 1.1rem 1.4rem; text-align: center;
+backdrop-filter: blur(12px);
+}
 
-  .field { margin-bottom: 1.15rem; }
-  .field label {
-    display: block; font-family: 'Cormorant Garamond', serif;
-    font-size: 0.76rem; letter-spacing: 0.13em;
-    text-transform: uppercase; color: #E76F51;
-    font-weight: 600; margin-bottom: 0.35rem;
-  }
-  .field .hint { font-size: 0.7rem; color: #8a7060; margin-bottom: 0.4rem; line-height: 1.5; }
-  .input-wrap { position: relative; }
-  .input-wrap .prefix {
-    position: absolute; left: 1rem; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem; color: #E76F51; pointer-events: none;
-  }
-  input[type="text"], input[type="email"], input[type="date"] {
-    width: 100%; background: #fff;
-    border: 1px solid rgba(231,111,81,0.25);
-    border-radius: 10px; padding: 0.82rem 1rem;
-    color: #2F2A26; font-size: 1rem; font-family: 'DM Sans', sans-serif;
-    outline: none; transition: border-color 0.2s; -webkit-appearance: none;
-  }
-  input[type="text"].has-prefix { padding-left: 2.1rem; }
-  input:focus { border-color: #E76F51; }
-  input::placeholder { color: #bbb; }
-  input[type="date"] { color-scheme: light; }
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(0.45) sepia(1) saturate(2) hue-rotate(5deg); cursor: pointer;
-  }
-  .field-error { font-size: 0.7rem; color: #e05252; margin-top: 0.35rem; }
+.header-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(2rem, 7vw, 2.8rem);
+font-weight: 700;
+line-height: 1.05;
+letter-spacing: 0.01em;
+background: linear-gradient(135deg, #F28705 0%, #F2B705 45%, #79DCF2 75%, #F2B705 100%);
+background-size: 200% auto;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: shimmer 3s linear infinite;
+}
 
-  /* DEPOSIT TOGGLE */
-  .deposit-toggle-row { display: flex; gap: 0.6rem; margin-bottom: 0.9rem; }
-  .dep-btn {
-    flex: 1; padding: 0.7rem 0.4rem; border-radius: 10px;
-    border: 1px solid rgba(231,111,81,0.2);
-    background: #fff;
-    color: #888; font-size: 0.75rem; font-family: 'DM Sans', sans-serif;
-    cursor: pointer; text-align: center; transition: all 0.2s; line-height: 1.4;
-  }
-  .dep-btn.active {
-    background: rgba(231,111,81,0.07); border-color: #E76F51;
-    color: #E76F51; font-weight: 600;
-  }
+.header-sub-app {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.05rem;
+font-weight: 700;
+color: #F2B705;
+letter-spacing: 0.05em;
+margin-top: 0.2rem;
+text-align: center;
+}
 
-  /* SPENDING CHIPS */
-  .chip-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
-  .chip {
-    padding: 0.38rem 0.75rem; border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: #fff;
-    color: #888; font-size: 0.73rem; font-family: 'DM Sans', sans-serif;
-    cursor: pointer; transition: all 0.18s; white-space: nowrap; flex-shrink: 0;
-  }
-  .chip.selected { background: rgba(42,157,143,0.15); border-color: #2A9D8F; color: #8B5E3C; }
-  .chip-input-wrap { position: relative; flex: 1; min-width: 100px; }
-  .chip-input-wrap .prefix { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-family: "Cormorant Garamond", serif; font-size: 1rem; color: #E76F51; pointer-events: none; }
-  .chip-amt-input { width: 100%; background: rgba(231,111,81,0.06); border: 1px solid rgba(231,111,81,0.22); border-radius: 8px; padding: 0.5rem 0.75rem 0.5rem 1.8rem; color: #fff; font-size: 0.88rem; font-family: "DM Sans", sans-serif; outline: none; }
-  .chip-amt-input:focus { border-color: #E76F51; }
-  .chip-total { font-size: 0.72rem; color: #E76F51; font-family: 'Cormorant Garamond', serif; }
+.header-sub {
+font-size: 0.9rem;
+color: #79DCF2;
+margin-top: 0.35rem;
+line-height: 1.5;
+opacity: 0.85;
+}
 
-  /* INSURANCE TOGGLE */
-  .toggle-card {
-    background: rgba(231,111,81,0.07); border: 1px solid rgba(231,111,81,0.18);
-    border-radius: 10px; padding: 0.9rem 1rem;
-    display: flex; align-items: flex-start; gap: 0.8rem;
-    margin-bottom: 1.15rem; cursor: pointer;
-  }
-  .toggle-track {
-    width: 44px; height: 24px; border-radius: 12px; border: none;
-    cursor: pointer; position: relative; flex-shrink: 0; margin-top: 2px; transition: background 0.2s;
-  }
-  .toggle-thumb {
-    position: absolute; top: 3px; width: 18px; height: 18px;
-    border-radius: 50%; background: #fff; transition: left 0.2s;
-  }
-  .toggle-label { font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: #E76F51; font-weight: 600; margin-bottom: 0.2rem; }
-  .toggle-hint { font-size: 0.7rem; color: #8a7060; line-height: 1.5; }
+.wrapper {
+max-width: 440px; margin: 0 auto;
+padding: 1.5rem 1.1rem 3rem;
+animation: fadeUp 0.4s ease;
+}
+
+.section-label {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.68rem; letter-spacing: 0.22em;
+text-transform: uppercase; color: #79DCF2;
+text-align: center; margin: 1.4rem 0 1.1rem;
+opacity: 0.8;
+}
+
+.field { margin-bottom: 1.15rem; }
+.field label {
+display: block; font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.76rem; letter-spacing: 0.13em;
+text-transform: uppercase; color: #F2B705;
+font-weight: 600; margin-bottom: 0.35rem;
+}
+.field .hint { font-size: 0.7rem; color: #79DCF2; margin-bottom: 0.4rem; line-height: 1.5; opacity: 0.85; }
+.input-wrap { position: relative; }
+.input-wrap .prefix {
+position: absolute; left: 1rem; top: 50%;
+transform: translateY(-50%);
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.05rem; color: #F2B705; pointer-events: none;
+}
+input[type=“text”], input[type=“email”], input[type=“date”] {
+width: 100%; background: rgba(3,127,140,0.4);
+border: 1px solid rgba(242,183,5,0.35);
+border-radius: 10px; padding: 0.82rem 1rem;
+color: #FFF8F0; font-size: 1rem; font-family: ‘DM Sans’, sans-serif;
+outline: none; transition: border-color 0.2s; -webkit-appearance: none;
+}
+input[type=“text”].has-prefix { padding-left: 2.1rem; }
+input:focus { border-color: #F2B705; }
+input::placeholder { color: rgba(121,220,242,0.5); }
+input[type=“date”] { color-scheme: dark; }
+input[type=“date”]::-webkit-calendar-picker-indicator {
+filter: invert(0.9) sepia(1) saturate(2) hue-rotate(5deg); cursor: pointer;
+}
+.field-error { font-size: 0.7rem; color: #F27979; margin-top: 0.35rem; }
+
+/* DEPOSIT TOGGLE */
+.deposit-toggle-row { display: flex; gap: 0.6rem; margin-bottom: 0.9rem; }
+.dep-btn {
+flex: 1; padding: 0.7rem 0.4rem; border-radius: 10px;
+border: 1px solid rgba(242,183,5,0.2);
+background: rgba(3,127,140,0.3);
+color: rgba(121,220,242,0.6); font-size: 0.75rem; font-family: ‘DM Sans’, sans-serif;
+cursor: pointer; text-align: center; transition: all 0.2s; line-height: 1.4;
+}
+.dep-btn.active {
+background: rgba(242,183,5,0.15); border-color: #F2B705;
+color: #F2B705; font-weight: 600;
+}
+
+/* SPENDING CHIPS */
+.chip-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.chip {
+padding: 0.38rem 0.75rem; border-radius: 20px;
+border: 1px solid rgba(121,220,242,0.25);
+background: rgba(3,127,140,0.3);
+color: rgba(121,220,242,0.75); font-size: 0.73rem; font-family: ‘DM Sans’, sans-serif;
+cursor: pointer; transition: all 0.18s; white-space: nowrap; flex-shrink: 0;
+}
+.chip.selected { background: rgba(242,183,5,0.2); border-color: #F2B705; color: #F2B705; }
+.chip-input-wrap { position: relative; flex: 1; min-width: 100px; }
+.chip-input-wrap .prefix { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); font-family: “Cormorant Garamond”, serif; font-size: 1rem; color: #F2B705; pointer-events: none; }
+.chip-amt-input { width: 100%; background: rgba(3,127,140,0.4); border: 1px solid rgba(242,183,5,0.3); border-radius: 8px; padding: 0.5rem 0.75rem 0.5rem 1.8rem; color: #FFF8F0; font-size: 0.88rem; font-family: “DM Sans”, sans-serif; outline: none; }
+.chip-amt-input:focus { border-color: #F2B705; }
+.chip-total { font-size: 0.72rem; color: #F2B705; font-family: ‘Cormorant Garamond’, serif; }
+
+/* INSURANCE TOGGLE */
+.toggle-card {
+background: rgba(3,127,140,0.3); border: 1px solid rgba(242,183,5,0.2);
+border-radius: 10px; padding: 0.9rem 1rem;
+display: flex; align-items: flex-start; gap: 0.8rem;
+margin-bottom: 1.15rem; cursor: pointer;
+}
+.toggle-track {
+width: 44px; height: 24px; border-radius: 12px; border: none;
+cursor: pointer; position: relative; flex-shrink: 0; margin-top: 2px; transition: background 0.2s;
+}
+.toggle-thumb {
+position: absolute; top: 3px; width: 18px; height: 18px;
+border-radius: 50%; background: #04606B; transition: left 0.2s;
+}
+.toggle-label { font-family: ‘Cormorant Garamond’, serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: #F2B705; font-weight: 600; margin-bottom: 0.2rem; }
+.toggle-hint { font-size: 0.7rem; color: #79DCF2; line-height: 1.5; opacity: 0.85; }
+
 .intro-text {
-  text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  line-height: 1.7;
-  color: #9c7b6a;
-  margin: 1.5rem auto 2rem;
-  max-width: 360px;
-  letter-spacing: 0.02em;
+text-align: center;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.2rem;
+line-height: 1.7;
+color: #79DCF2;
+margin: 1.5rem auto 2rem;
+max-width: 360px;
+letter-spacing: 0.02em;
+opacity: 0.9;
 }
-  /* BUTTONS */
-  .btn-primary {
-    width: 100%; padding: 1.1rem; border-radius: 12px; border: none;
-    background: linear-gradient(135deg, #E76F51, #e8c96a);
-    color: #2F2A26; font-size: 1rem; font-weight: 700;
-    font-family: 'Cormorant Garamond', serif; letter-spacing: 0.12em;
-    text-transform: uppercase; cursor: pointer; margin-top: 0.5rem;
-    animation: pulse 2.5s ease-in-out infinite; transition: transform 0.12s;
-  }
-  .btn-primary:active { transform: scale(0.97); }
-  .btn-ghost {
-    width: 100%; padding: 0.8rem; border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.12); background: transparent;
-    color: #8a7060; font-size: 0.85rem; font-family: 'DM Sans', sans-serif;
-    cursor: pointer; margin-top: 0.8rem; transition: color 0.2s;
-  }
-  .btn-ghost:hover { color: #2F2A26; }
-  .powered { text-align: center; font-size: 0.68rem; color: #bbb; margin-top: 1rem; }
 
-  /* RESULTS */
-  .verdict-banner { border-radius: 16px; padding: 1.4rem; margin-bottom: 1.1rem; text-align: center; animation: fadeUp 0.45s ease; }
-  .verdict-emoji { font-size: 3rem; margin-bottom: 0.45rem; }
-  .verdict-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 700; line-height: 1.2; }
-  .verdict-message { font-size: 0.9rem; color: #2F2A26; margin-top: 0.7rem; line-height: 1.65; }
+/* BUTTONS */
+.btn-primary {
+width: 100%; padding: 1.1rem; border-radius: 12px; border: none;
+background: linear-gradient(135deg, #F28705, #F2B705);
+color: #04606B; font-size: 1rem; font-weight: 700;
+font-family: ‘Cormorant Garamond’, serif; letter-spacing: 0.12em;
+text-transform: uppercase; cursor: pointer; margin-top: 0.5rem;
+animation: pulse 2.5s ease-in-out infinite; transition: transform 0.12s;
+}
+.btn-primary:active { transform: scale(0.97); }
+.btn-ghost {
+width: 100%; padding: 0.8rem; border-radius: 10px;
+border: 1px solid rgba(121,220,242,0.25); background: transparent;
+color: #79DCF2; font-size: 0.85rem; font-family: ‘DM Sans’, sans-serif;
+cursor: pointer; margin-top: 0.8rem; transition: color 0.2s;
+}
+.btn-ghost:hover { color: #FFF8F0; }
 
-  .deposit-alert {
-    background: rgba(42,157,143,0.1); border: 1px solid rgba(42,157,143,0.35);
-    border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 1.1rem;
-  }
-  .deposit-alert-label { font-family: 'Cormorant Garamond', serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #2A9D8F; margin-bottom: 0.4rem; }
-  .deposit-alert-text { font-size: 0.84rem; color: #2F2A26; line-height: 1.55; }
+/* RESULTS */
+.verdict-banner { border-radius: 16px; padding: 1.4rem; margin-bottom: 1.1rem; text-align: center; animation: fadeUp 0.45s ease; }
+.verdict-emoji { font-size: 3rem; margin-bottom: 0.45rem; }
+.verdict-title { font-family: ‘Cormorant Garamond’, serif; font-size: 1.55rem; font-weight: 700; line-height: 1.2; }
+.verdict-message { font-size: 0.9rem; color: #FFF8F0; margin-top: 0.7rem; line-height: 1.65; }
 
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-bottom: 1.1rem; }
-  .stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(231,111,81,0.08); border-radius: 12px; padding: 0.85rem; text-align: center; }
-  .stat-label { font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #E76F51; }
-  .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: #2F2A26; margin-top: 0.28rem; }
+.deposit-alert {
+background: rgba(121,220,242,0.12); border: 1px solid rgba(121,220,242,0.35);
+border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 1.1rem;
+}
+.deposit-alert-label { font-family: ‘Cormorant Garamond’, serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #79DCF2; margin-bottom: 0.4rem; }
+.deposit-alert-text { font-size: 0.84rem; color: #FFF8F0; line-height: 1.55; }
 
-  .progress-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1rem; margin-bottom: 1.1rem; }
-  .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-  .progress-row span:first-child { font-family: 'Cormorant Garamond', serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #E76F51; }
-  .progress-row span:last-child { font-size: 0.72rem; color: #8a7060; }
-  .progress-track { height: 6px; background: rgba(0,0,0,0.08); border-radius: 3px; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 3px; transition: width 0.9s ease; }
-  .progress-note { font-size: 0.72rem; color: #8a7060; margin-top: 0.5rem; }
-  .progress-note strong { color: #2F2A26; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-bottom: 1.1rem; }
+.stat-card { background: rgba(3,127,140,0.35); border: 1px solid rgba(242,183,5,0.15); border-radius: 12px; padding: 0.85rem; text-align: center; }
+.stat-label { font-family: ‘Cormorant Garamond’, serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #F2B705; }
+.stat-value { font-family: ‘Cormorant Garamond’, serif; font-size: 1.25rem; font-weight: 700; color: #FFF8F0; margin-top: 0.28rem; }
 
-  .scenarios-label { font-family: 'Cormorant Garamond', serif; font-size: 0.76rem; letter-spacing: 0.13em; text-transform: uppercase; color: #E76F51; font-weight: 600; margin-bottom: 0.7rem; }
-  .scenario-item { background: #F3E0D6; border: 1px solid rgba(231,111,81,0.1); border-radius: 10px; padding: 0.85rem; margin-bottom: 0.6rem; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
-  .scenario-num { font-family: 'Cormorant Garamond', serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #E76F51; }
-  .scenario-text { font-size: 0.88rem; color: #2F2A26; margin-top: 0.3rem; line-height: 1.55; }
+.progress-card { background: rgba(3,127,140,0.3); border: 1px solid rgba(242,183,5,0.12); border-radius: 12px; padding: 1rem; margin-bottom: 1.1rem; }
+.progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.progress-row span:first-child { font-family: ‘Cormorant Garamond’, serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #F2B705; }
+.progress-row span:last-child { font-size: 0.72rem; color: #79DCF2; }
+.progress-track { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width 0.9s ease; }
+.progress-note { font-size: 0.72rem; color: #79DCF2; margin-top: 0.5rem; }
+.progress-note strong { color: #FFF8F0; }
 
-  /* EMAIL GATE */
-  .gate-card { background: rgba(231,111,81,0.07); border: 1px solid rgba(231,111,81,0.22); border-radius: 16px; padding: 1.2rem; margin-bottom: 1.1rem; }
-  .gate-title { font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; letter-spacing: 0.13em; text-transform: uppercase; color: #E76F51; font-weight: 600; margin-bottom: 0.3rem; }
-  .gate-sub { font-size: 0.78rem; color: #8a7060; margin-bottom: 1rem; line-height: 1.55; }
-  .gate-card input {
-    width: 100%; background: #fff; border: 1px solid rgba(231,111,81,0.2);
-    border-radius: 10px; padding: 0.78rem 1rem; color: #fff; font-size: 0.93rem;
-    font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 0.6rem; transition: border-color 0.2s;
-  }
-  .gate-card input:focus { border-color: #E76F51; }
-  .btn-gate { width: 100%; padding: 0.88rem; border-radius: 10px; border: none; font-size: 0.88rem; font-weight: 700; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
-  .btn-gate.active { background: linear-gradient(135deg, #E76F51, #e8c96a); color: #2F2A26; }
-  .btn-gate.inactive { background: rgba(255,255,255,0.08); color: #444; cursor: not-allowed; }
+.scenarios-label { font-family: ‘Cormorant Garamond’, serif; font-size: 0.76rem; letter-spacing: 0.13em; text-transform: uppercase; color: #F2B705; font-weight: 600; margin-bottom: 0.7rem; }
+.scenario-item { background: rgba(3,127,140,0.4); border: 1px solid rgba(242,183,5,0.15); border-radius: 10px; padding: 0.85rem; margin-bottom: 0.6rem; }
+.scenario-num { font-family: ‘Cormorant Garamond’, serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #F2B705; }
+.scenario-text { font-size: 0.88rem; color: #FFF8F0; margin-top: 0.3rem; line-height: 1.55; }
 
-  /* MILESTONES */
-  .milestones-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(231,111,81,0.08); border-radius: 16px; padding: 1.1rem; margin-bottom: 1rem; }
-  .milestones-title { font-family: 'Cormorant Garamond', serif; font-size: 0.76rem; letter-spacing: 0.13em; text-transform: uppercase; color: #E76F51; font-weight: 600; margin-bottom: 0.7rem; }
-  .milestones-list { max-height: 210px; overflow-y: auto; }
-  .milestone-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(231,111,81,0.07); }
-  .milestone-month { font-size: 0.8rem; color: #8a7060; }
-  .milestone-amt { font-size: 0.85rem; color: #2F2A26; font-weight: 600; }
-  .milestone-check { font-size: 0.68rem; color: #4ade80; margin-left: 0.4rem; }
-  .milestone-dep { font-size: 0.68rem; color: #2A9D8F; margin-left: 0.4rem; }
+/* EMAIL GATE */
+.gate-card { background: rgba(3,127,140,0.35); border: 1px solid rgba(242,183,5,0.25); border-radius: 16px; padding: 1.2rem; margin-bottom: 1.1rem; }
+.gate-title { font-family: ‘Cormorant Garamond’, serif; font-size: 0.78rem; letter-spacing: 0.13em; text-transform: uppercase; color: #F2B705; font-weight: 600; margin-bottom: 0.3rem; }
+.gate-sub { font-size: 0.78rem; color: #79DCF2; margin-bottom: 1rem; line-height: 1.55; opacity: 0.85; }
+.gate-card input {
+width: 100%; background: rgba(3,127,140,0.5); border: 1px solid rgba(242,183,5,0.25);
+border-radius: 10px; padding: 0.78rem 1rem; color: #FFF8F0; font-size: 0.93rem;
+font-family: ‘DM Sans’, sans-serif; outline: none; margin-bottom: 0.6rem; transition: border-color 0.2s;
+}
+.gate-card input:focus { border-color: #F2B705; }
+.btn-gate { width: 100%; padding: 0.88rem; border-radius: 10px; border: none; font-size: 0.88rem; font-weight: 700; font-family: ‘Cormorant Garamond’, serif; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+.btn-gate.active { background: linear-gradient(135deg, #F28705, #F2B705); color: #04606B; }
+.btn-gate.inactive { background: rgba(255,255,255,0.08); color: rgba(121,220,242,0.4); cursor: not-allowed; }
 
-  /* CTA */
-  .cta-card { background: linear-gradient(135deg, rgba(231,111,81,0.08), rgba(201,168,76,0.05)); border: 1px solid rgba(231,111,81,0.2); border-radius: 16px; padding: 1.3rem; text-align: center; margin-bottom: 1rem; }
-  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: #E76F51; margin-bottom: 0.35rem; }
-  .cta-sub { font-size: 0.8rem; color: #8a7060; margin-bottom: 1rem; line-height: 1.55; }
-  .btn-book { display: block; width: 100%; padding: 1rem; border-radius: 10px; background: linear-gradient(135deg, #E76F51, #e8c96a); color: #2F2A26; font-size: 0.9rem; font-weight: 700; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; text-align: center; }
-  .btn-book:active { opacity: 0.85; }
+/* MILESTONES */
+.milestones-card { background: rgba(3,127,140,0.3); border: 1px solid rgba(242,183,5,0.12); border-radius: 16px; padding: 1.1rem; margin-bottom: 1rem; }
+.milestones-title { font-family: ‘Cormorant Garamond’, serif; font-size: 0.76rem; letter-spacing: 0.13em; text-transform: uppercase; color: #F2B705; font-weight: 600; margin-bottom: 0.7rem; }
+.milestones-list { max-height: 210px; overflow-y: auto; }
+.milestone-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(242,183,5,0.1); }
+.milestone-month { font-size: 0.8rem; color: #79DCF2; }
+.milestone-amt { font-size: 0.85rem; color: #FFF8F0; font-weight: 600; }
+.milestone-check { font-size: 0.68rem; color: #4ade80; margin-left: 0.4rem; }
+.milestone-dep { font-size: 0.68rem; color: #F2B705; margin-left: 0.4rem; }
 
-  ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(231,111,81,0.3); border-radius: 2px; }
+/* CONNECT CARD */
+.connect-card {
+background: rgba(3,127,140,0.4);
+border: 1px solid rgba(242,183,5,0.2);
+border-radius: 16px; padding: 1.2rem; text-align: center; margin-bottom: 1.1rem;
+}
+
+/* CTA */
+.cta-card { background: linear-gradient(135deg, rgba(242,135,5,0.15), rgba(242,183,5,0.08)); border: 1px solid rgba(242,183,5,0.25); border-radius: 16px; padding: 1.3rem; text-align: center; margin-bottom: 1rem; }
+.cta-title { font-family: ‘Cormorant Garamond’, serif; font-size: 1.1rem; font-weight: 700; color: #F2B705; margin-bottom: 0.35rem; }
+.cta-sub { font-size: 0.8rem; color: #79DCF2; margin-bottom: 1rem; line-height: 1.55; opacity: 0.85; }
+.btn-book { display: block; width: 100%; padding: 1rem; border-radius: 10px; background: linear-gradient(135deg, #F28705, #F2B705); color: #04606B; font-size: 0.9rem; font-weight: 700; font-family: ‘Cormorant Garamond’, serif; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; text-align: center; }
+.btn-book:active { opacity: 0.85; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(242,183,5,0.4); border-radius: 2px; }
 </style>
+
 </head>
 <body>
 
-<div style="text-align:center; width:100%;">
+<div class="header">
   <div class="header-title">ELITE TRIPPS™ REALITY CHECK ✨</div>
-  <div style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:#E76F51; letter-spacing:0.05em; margin-bottom:0.3rem;">Budget App</div>
+  <div class="header-sub-app">Budget App</div>
   <div class="header-sub">Think the trip is out of your budget? Let's see what's actually possible.</div>
 </div>
 
 <!-- FORM -->
+
 <div class="wrapper" id="form-view">
   <p class="intro-text">
-  Go ahead… drop your details below and let’s see what it would really take to make this trip happen ✨
-</p>
+    Go ahead… drop your details below and let's see what it would really take to make this trip happen ✨
+  </p>
 
   <p class="section-label">— Trip Details —</p>
 
@@ -377,12 +402,12 @@
   </div>
 
   <div class="toggle-card" onclick="toggleInsurance()">
-    <button class="toggle-track" id="ins-track" style="background:#E76F51;" onclick="event.stopPropagation(); toggleInsurance()">
+    <button class="toggle-track" id="ins-track" style="background:#F2B705;" onclick="event.stopPropagation(); toggleInsurance()">
       <span class="toggle-thumb" id="ins-thumb" style="left:23px;"></span>
     </button>
     <div>
       <p class="toggle-label">Add Travel Insurance</p>
-      <p class="toggle-hint"><p class="toggle-hint">Recommended. Adds ~8% of trip cost. Real talk — don't skip this. ✈️</p>
+      <p class="toggle-hint">Recommended. Adds ~8% of trip cost. Real talk — don't skip this. ✈️</p>
     </div>
   </div>
 
@@ -404,11 +429,12 @@
     <p class="field-error" id="err-targetDate" style="display:none">Please pick your due date</p>
   </div>
 
-  <button class="btn-primary" onclick="runCheck()">Give Me My Reality Check ✨</button>
+<button class="btn-primary" onclick="runCheck()">Give Me My Reality Check ✨</button>
 
 </div>
 
 <!-- RESULTS -->
+
 <div class="wrapper" id="result-view" style="display:none">
 
   <div class="verdict-banner" id="verdict-banner">
@@ -440,24 +466,24 @@
     <div id="scenarios-list"></div>
   </div>
 
-
-
   <!-- CONNECT WITH SABRINA -->
-  <div style="background:#F3E0D6; border:1px solid rgba(231,111,81,0.1); border-radius:16px; padding:1.2rem; text-align:center; margin-bottom:1.1rem;">
+
+  <div class="connect-card">
     <p style="font-size:1.4rem; margin-bottom:0.4rem;">🖤</p>
-    <p style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; color:#2F2A26; margin-bottom:0.4rem;">Enjoyed this? Let's connect!</p>
-    <p style="font-size:0.78rem; color:#666; line-height:1.65; margin-bottom:1rem; font-family:'DM Sans',sans-serif;">Follow me on Facebook for more — and if this helped you, share it with a friend who needs a reality check too. 😉</p>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; color:#F2B705; margin-bottom:0.4rem;">Enjoyed this? Let's connect!</p>
+    <p style="font-size:0.78rem; color:#79DCF2; line-height:1.65; margin-bottom:1rem; font-family:'DM Sans',sans-serif; opacity:0.85;">Follow me on Facebook for more — and if this helped you, share it with a friend who needs a reality check too. 😉</p>
     <a href="https://www.facebook.com/sabrinanicholsjohnson" target="_blank"
-      style="display:block; width:100%; box-sizing:border-box; padding:0.88rem; border-radius:10px; border:1px solid rgba(231,111,81,0.22); background:transparent; color:#2F2A26; font-size:0.85rem; font-weight:600; font-family:'DM Sans',sans-serif; text-decoration:none; text-align:center; margin-bottom:0.5rem;">
+      style="display:block; width:100%; box-sizing:border-box; padding:0.88rem; border-radius:10px; border:1px solid rgba(242,183,5,0.3); background:transparent; color:#FFF8F0; font-size:0.85rem; font-weight:600; font-family:'DM Sans',sans-serif; text-decoration:none; text-align:center; margin-bottom:0.5rem;">
       👉 Follow Sabrina on Facebook
     </a>
     <a href="https://m.facebook.com/groups/elitetripps/?ref=share" target="_blank"
-      style="display:block; width:100%; box-sizing:border-box; padding:0.88rem; border-radius:10px; border:1px solid rgba(231,111,81,0.15); background:transparent; color:#E76F51; font-size:0.85rem; font-weight:600; font-family:'DM Sans',sans-serif; text-decoration:none; text-align:center;">
+      style="display:block; width:100%; box-sizing:border-box; padding:0.88rem; border-radius:10px; border:1px solid rgba(242,183,5,0.2); background:transparent; color:#F2B705; font-size:0.85rem; font-weight:600; font-family:'DM Sans',sans-serif; text-decoration:none; text-align:center;">
       ✈️ Join the Elite Tripps™ Facebook Group
     </a>
   </div>
 
-  <!-- EMAIL GATE via Formspree -->
+  <!-- EMAIL GATE via Web3Forms -->
+
   <div class="gate-card" id="gate-section">
     <p class="gate-title">📬 Get Your Full Savings Plan</p>
     <p class="gate-sub">Drop your name and email — I'll send your month-by-month breakdown straight to you.</p>
@@ -465,13 +491,13 @@
       <input type="text"  name="name"           id="gate-name"    placeholder="Your first name"    oninput="checkGate()" autocomplete="given-name" />
       <input type="email" name="email"          id="gate-email"   placeholder="Your email address" oninput="checkGate()" autocomplete="email" />
       <input type="hidden" name="trip_total"        id="hidden-total" />
-<input type="hidden" name="amount_needed"     id="hidden-needed" />
-<input type="hidden" name="verdict"           id="hidden-verdict" />
-<input type="hidden" name="monthly_savings"   id="hidden-monthly" />
-<input type="hidden" name="months_available"  id="hidden-months-avail" />
-<input type="hidden" name="months_needed"     id="hidden-months-need" />
-<input type="hidden" name="deposit_status"    id="hidden-deposit-status" />
-<input type="hidden" name="deposit_amount"    id="hidden-deposit-amt" />
+      <input type="hidden" name="amount_needed"     id="hidden-needed" />
+      <input type="hidden" name="verdict"           id="hidden-verdict" />
+      <input type="hidden" name="monthly_savings"   id="hidden-monthly" />
+      <input type="hidden" name="months_available"  id="hidden-months-avail" />
+      <input type="hidden" name="months_needed"     id="hidden-months-need" />
+      <input type="hidden" name="deposit_status"    id="hidden-deposit-status" />
+      <input type="hidden" name="deposit_amount"    id="hidden-deposit-amt" />
       <input type="hidden" name="access_key" value="63b2dfd1-76d6-409c-826e-0bf68e45f526" />
       <input type="hidden" name="subject" value="New Elite Tripps™ Reality Check Lead 🎉" />
       <input type="hidden" name="from_name" value="Elite Tripps Reality Check" />
@@ -481,21 +507,30 @@
   </div>
 
   <!-- MILESTONES (after email gate) -->
+
   <div id="milestones-section" style="display:none;">
     <div class="milestones-card">
       <p class="milestones-title">📅 Your Month-by-Month Plan</p>
       <div class="milestones-list" id="milestones-list"></div>
     </div>
 
-    <div class="cta-card" id="cta-card">
-      <p class="cta-title" id="cta-title">Ready to make this trip happen? ✈️</p>
-      <p class="cta-sub" id="cta-sub">Let Sabrina help you find the perfect trip at the right price — cruises, group trips, and more.</p>
-      <a href="https://www.elitetripps.com" target="_blank" class="btn-book" id="cta-btn">Book with Sabrina → www.EliteTripps.com</a>
-    </div>
+```
+<div class="cta-card" id="cta-card">
+  <p class="cta-title" id="cta-title">Ready to make this trip happen? ✈️</p>
+  <p class="cta-sub" id="cta-sub">Let Sabrina help you find the perfect trip at the right price — cruises, group trips, and more.</p>
+  <a href="https://www.elitetripps.com" target="_blank" class="btn-book" id="cta-btn">Book with Sabrina → www.EliteTripps.com</a>
+</div>
+```
 
   </div>
 
-  <button class="btn-ghost" onclick="resetForm()">← Start Over</button>
+<button class="btn-ghost" onclick="resetForm()">← Start Over</button>
+
+</div>
+
+<div style="text-align:center; padding: 1.5rem 1rem 2rem; border-top: 1px solid rgba(242,183,5,0.1); margin-top: 1rem;">
+  <p style="font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:rgba(121,220,242,0.6); letter-spacing:0.08em;">Created by <a href="https://www.facebook.com/sabrinanicholsjohnson" target="_blank" style="color:#F2B705; text-decoration:none; font-weight:600;">Sabrina Nichols Johnson</a></p>
+  <p style="font-size:0.7rem; color:rgba(121,220,242,0.5); margin-top:0.3rem; font-family:'DM Sans',sans-serif;"><a href="https://www.elitetripps.com" target="_blank" style="color:#F2B705; text-decoration:none;">www.elitetripps.com</a></p>
 </div>
 
 <script>
@@ -515,7 +550,7 @@
 
   function toggleInsurance() {
     insuranceOn = !insuranceOn;
-    document.getElementById('ins-track').style.background = insuranceOn ? '#E76F51' : 'rgba(255,255,255,0.1)';
+    document.getElementById('ins-track').style.background = insuranceOn ? '#F2B705' : 'rgba(255,255,255,0.1)';
     document.getElementById('ins-thumb').style.left = insuranceOn ? '23px' : '3px';
   }
 
@@ -659,9 +694,9 @@
   }
 
   const vCfg={
-    green: {emoji:'✅',label:"Sis, You're Good! 🎉",       color:'#4ade80',bg:'rgba(74,222,128,0.08)',  border:'rgba(74,222,128,0.25)'},
-    yellow:{emoji:'⚠️',label:"Something's Gotta Shift 💡", color:'#f59e0b',bg:'rgba(245,158,11,0.08)', border:'rgba(245,158,11,0.25)'},
-    red:   {emoji:'🚨',label:"Let's Be Real, Sis 💬",      color:'#f87171',bg:'rgba(248,113,113,0.08)',border:'rgba(248,113,113,0.25)'},
+    green: {emoji:'✅',label:"Sis, You're Good! 🎉",       color:'#4ade80',bg:'rgba(74,222,128,0.1)',  border:'rgba(74,222,128,0.3)'},
+    yellow:{emoji:'⚠️',label:"Something's Gotta Shift 💡", color:'#F2B705',bg:'rgba(242,183,5,0.1)', border:'rgba(242,183,5,0.3)'},
+    red:   {emoji:'🚨',label:"Let's Be Real, Sis 💬",      color:'#F27979',bg:'rgba(242,121,121,0.1)',border:'rgba(242,121,121,0.3)'},
   };
 
   function runCheck(){
@@ -705,15 +740,14 @@
     }
 
     document.getElementById('hidden-total').value=`$${r.totalCost.toLocaleString()}`;
-document.getElementById('hidden-needed').value=`$${r.amountNeeded.toLocaleString()}`;
-document.getElementById('hidden-verdict').value=r.verdict.toUpperCase();
-document.getElementById('hidden-monthly').value=`$${parseCurrency('monthlySavings').toLocaleString()}/month`;
-document.getElementById('hidden-months-avail').value=`${r.monthsAvail} months`;
-document.getElementById('hidden-months-need').value=r.monthsToSave===Infinity?'Cannot save enough':`${r.monthsToSave} months`;
-document.getElementById('hidden-deposit-status').value=depositStatus==='none'?'No deposit required':depositStatus==='paid'?`Deposit already paid`:`Deposit still due: $${parseCurrency('depositAmount').toLocaleString()}`;
-document.getElementById('hidden-deposit-amt').value=depositStatus==='due'?`$${parseCurrency('depositAmount').toLocaleString()} due`:depositStatus==='paid'?`$${parseCurrency('depositPaid').toLocaleString()} paid`:'N/A';
+    document.getElementById('hidden-needed').value=`$${r.amountNeeded.toLocaleString()}`;
+    document.getElementById('hidden-verdict').value=r.verdict.toUpperCase();
+    document.getElementById('hidden-monthly').value=`$${parseCurrency('monthlySavings').toLocaleString()}/month`;
+    document.getElementById('hidden-months-avail').value=`${r.monthsAvail} months`;
+    document.getElementById('hidden-months-need').value=r.monthsToSave===Infinity?'Cannot save enough':`${r.monthsToSave} months`;
+    document.getElementById('hidden-deposit-status').value=depositStatus==='none'?'No deposit required':depositStatus==='paid'?`Deposit already paid`:`Deposit still due: $${parseCurrency('depositAmount').toLocaleString()}`;
+    document.getElementById('hidden-deposit-amt').value=depositStatus==='due'?`$${parseCurrency('depositAmount').toLocaleString()} due`:depositStatus==='paid'?`$${parseCurrency('depositPaid').toLocaleString()} paid`:'N/A';
 
-    // Verdict-matched CTA
     const ctaCopy = {
       green:  { title:"You're ready! Let's lock in your trip. ✈️",         sub:"You've got a solid plan. Let Sabrina help you find the perfect trip and make it official.",    btn:"Let's Book Your Trip → EliteTripps.com" },
       yellow: { title:"You're close — let me help you make it work. 💡",   sub:"A few small adjustments and this trip is yours. Sabrina can help you find the right fit for your budget.", btn:"Let's Make It Work → EliteTripps.com" },
@@ -782,9 +816,6 @@ document.getElementById('hidden-deposit-amt').value=depositStatus==='due'?`$${pa
     window.scrollTo({top:0,behavior:'smooth'});
   }
 </script>
-  <div style="text-align:center; padding: 1.5rem 1rem 2rem; border-top: 1px solid rgba(231,111,81,0.07); margin-top: 1rem;">
-    <p style="font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:#999; letter-spacing:0.08em;">Created by <a href="https://www.facebook.com/sabrinanicholsjohnson" target="_blank" style="color:#E76F51; text-decoration:none; font-weight:600;">Sabrina Nichols Johnson</a></p>
-    <p style="font-size:0.7rem; color:#a89e96; margin-top:0.3rem; font-family:'DM Sans',sans-serif;"><a href="https://www.elitetripps.com" target="_blank" style="color:#E76F51; text-decoration:none;">www.elitetripps.com</a></p>
-  </div>
+
 </body>
 </html>
