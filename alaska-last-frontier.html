@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Into the Last Frontier | Elite Tripps™</title>
+  <meta name="description" content="Alaska was calling. We answered. Virgin Voyages Brilliant Lady. July 1–8, 2027. Departing Seattle." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy:       #0b1a2e;
+      --navy-mid:   #112240;
+      --gold:       #c9a84c;
+      --gold-light: #e2c97e;
+      --glacier:    #1a4a6b;
+      --glacier-mid:#2a6a8b;
+      --glacier-light: #4a9ab5;
+      --cream:      #fdf8f2;
+      --white:      #ffffff;
+      --text-dark:  #1a1a2e;
+      --text-mid:   #4a4a6a;
+      --text-light: #8a8aaa;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Montserrat', sans-serif;
+
+      --radius: 12px;
+      --shadow: 0 8px 40px rgba(0,0,0,0.12);
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--cream); color: var(--text-dark); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .container--narrow { max-width: 760px; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar { background: var(--navy); padding: 14px 24px; text-align: center; }
+    .topbar a {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+    .topbar a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #050e1c 0%, var(--glacier) 55%, #0d2e45 100%);
+      padding: 80px 24px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.1) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(74,154,181,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero__badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero__eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--glacier-light);
+      margin-bottom: 10px;
+    }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .hero__title em { font-style: italic; color: var(--gold-light); }
+    .hero__sub {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 28px;
+    }
+    .hero__tagline {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero__tagline strong { color: var(--white); font-weight: 700; }
+
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .hero__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-gold {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.4);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.55); }
+
+    /* ── HIGHLIGHT STRIP ── */
+    .highlight-strip { background: var(--navy); padding: 20px 24px; }
+    .highlight-strip__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .highlight-strip__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 24px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border-right: 1px solid rgba(201,168,76,0.2);
+    }
+    .highlight-strip__item:last-child { border-right: none; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 80px 0; }
+    .section--light { background: var(--white); }
+    .section--cream { background: var(--cream); }
+    .section--navy { background: var(--navy); }
+    .section--glacier { background: linear-gradient(135deg, #050e1c 0%, var(--glacier) 100%); }
+
+    .section__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--text-dark);
+    }
+    .section--navy .section__heading,
+    .section--glacier .section__heading { color: var(--white); }
+    .section__body { font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; max-width: 600px; }
+
+    /* ── ITINERARY ── */
+    .itinerary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) { .itinerary-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .itinerary-grid { grid-template-columns: 1fr; } }
+
+    .itin-card {
+      background: var(--white);
+      border: 1px solid rgba(26,74,107,0.12);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s;
+    }
+    .itin-card:hover { transform: translateY(-4px); }
+    .itin-card__day {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--glacier-mid);
+      margin-bottom: 2px;
+    }
+    .itin-card__date {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .itin-card__icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .itin-card__port {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .itin-card__time { font-size: 0.68rem; color: var(--text-light); font-weight: 600; }
+    .itin-card.highlight {
+      background: linear-gradient(135deg, var(--glacier) 0%, #0d2e45 100%);
+      border-color: var(--glacier-light);
+    }
+    .itin-card.highlight .itin-card__day { color: var(--gold-light); }
+    .itin-card.highlight .itin-card__date,
+    .itin-card.highlight .itin-card__port { color: var(--white); }
+    .itin-card.highlight .itin-card__time { color: rgba(255,255,255,0.65); }
+
+    /* ── INCLUSIONS ── */
+    .inclusions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    @media (max-width: 600px) { .inclusions-grid { grid-template-columns: 1fr; } }
+    .inclusion-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .inclusion-card__icon { font-size: 1.4rem; flex-shrink: 0; }
+    .inclusion-card__text { font-size: 0.88rem; color: rgba(255,255,255,0.85); line-height: 1.6; font-weight: 500; }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    @media (max-width: 600px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+    .price-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--gold);
+    }
+    .price-card.featured { border-top-color: var(--glacier-mid); }
+    .price-card__label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+    .price-card__name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .price-card__amount {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--glacier);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .price-card__per { font-size: 0.7rem; color: var(--text-light); font-weight: 600; margin-bottom: 6px; }
+    .price-card__cabin { font-size: 0.82rem; color: var(--text-mid); font-weight: 600; margin-bottom: 20px; }
+    .price-card__deposit {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 10px 20px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .price-card__deposit-sub { font-size: 0.68rem; color: var(--text-light); }
+
+    .price-note {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      font-weight: 600;
+      line-height: 1.7;
+    }
+    .price-note strong { color: var(--glacier); }
+
+    /* ── STEPS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    @media (max-width: 700px) { .steps { grid-template-columns: 1fr; } }
+    .step {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+    }
+    .step__num {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--glacier) 0%, var(--glacier-mid) 100%);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 1.1rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step__title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .step__body { font-size: 0.83rem; color: var(--text-mid); line-height: 1.7; }
+
+    /* ── URGENCY ── */
+    .urgency {
+      background: linear-gradient(135deg, #050e1c 0%, var(--glacier) 100%);
+      padding: 56px 24px;
+      text-align: center;
+    }
+    .urgency__headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .urgency__sub {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+    }
+
+    /* ── FORM ── */
+    .inquiry-section { padding: 80px 0; background: var(--cream); }
+    .form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 48px 40px;
+      box-shadow: var(--shadow);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) { .form-card { padding: 32px 24px; } }
+    .form-card__title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .form-card__sub { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 32px; }
+
+    .form-row { margin-bottom: 18px; }
+    .form-row label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 6px;
+    }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #e0e0ee;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: var(--cream);
+      transition: border-color 0.2s;
+      outline: none;
+      appearance: none;
+    }
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus { border-color: var(--gold); background: var(--white); }
+    .form-row textarea { resize: vertical; min-height: 100px; }
+    .form-row .field-note {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 540px) { .form-grid { grid-template-columns: 1fr; } }
+
+    .form-submit { margin-top: 28px; text-align: center; }
+    .form-submit p { font-size: 0.75rem; color: var(--text-light); margin-top: 12px; }
+
+    /* ── FINAL CTA ── */
+    .final-cta { background: var(--navy); padding: 80px 24px; text-align: center; }
+    .final-cta__heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+    .final-cta__heading em { color: var(--gold-light); font-style: italic; }
+    .final-cta__sub {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    /* ── BADGE STRIP ── */
+    .badge-strip {
+      background: #050e1c;
+      padding: 20px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+    }
+    .badge-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .badge-item .badge-icon { font-size: 1.3rem; color: var(--gold); }
+
+    /* ── FOOTER ── */
+    .site-footer { background: var(--navy); padding: 32px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+    .site-footer p { font-size: 0.75rem; color: rgba(255,255,255,0.4); line-height: 1.8; }
+    .site-footer a { color: var(--gold-light); }
+    .site-footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a href="https://www.elitetripps.com">← Back to Elite Tripps™</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__badge">Virgin Voyages · Alaska 2027</div>
+    <p class="hero__eyebrow reveal">Elite Tripps™ Presents</p>
+    <h1 class="hero__title reveal">Into the<br><em>Last Frontier</em></h1>
+    <p class="hero__sub reveal">Alaska Was Calling. We Answered.</p>
+    <p class="hero__tagline reveal">
+      You've done the Caribbean. You've seen the beaches.<br>
+      <strong>It's time for something that actually takes your breath away.</strong>
+    </p>
+
+    <div class="hero__meta reveal">
+      <div class="hero__meta-item">🚢 Brilliant Lady · Virgin Voyages</div>
+      <div class="hero__meta-item">📍 Departs Seattle, WA</div>
+      <div class="hero__meta-item">📅 July 1–8, 2027</div>
+      <div class="hero__meta-item">🧊 Inside Passage & Glacial Fjords</div>
+    </div>
+
+    <div class="reveal">
+      <a href="#inquiry" class="btn-gold">Claim Your Cabin</a>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHT STRIP -->
+  <div class="highlight-strip">
+    <div class="highlight-strip__inner">
+      <div class="highlight-strip__item">🌊 Inside Passage</div>
+      <div class="highlight-strip__item">🧊 Tracy Arm Fjord</div>
+      <div class="highlight-strip__item">📶 Classic Wi-Fi Included</div>
+      <div class="highlight-strip__item">💰 $100 Sailor Loot</div>
+      <div class="highlight-strip__item">🥂 Adults Only · 18+</div>
+    </div>
+  </div>
+
+  <!-- ITINERARY -->
+  <section class="section section--cream">
+    <div class="container">
+      <p class="section-label reveal">Your Itinerary</p>
+      <h2 class="section__heading reveal">7 Nights.<br>One Unforgettable Route.</h2>
+      <div class="itinerary-grid">
+
+        <div class="itin-card reveal">
+          <div class="itin-card__day">Thursday · Day 1</div>
+          <div class="itin-card__date">Jul 1</div>
+          <div class="itin-card__icon">🚢</div>
+          <div class="itin-card__port">Seattle, WA</div>
+          <div class="itin-card__time">Departs 5:00 PM</div>
+        </div>
+
+        <div class="itin-card highlight reveal">
+          <div class="itin-card__day">Friday · Day 2</div>
+          <div class="itin-card__date">Jul 2</div>
+          <div class="itin-card__icon">🌊</div>
+          <div class="itin-card__port">Inside Passage</div>
+          <div class="itin-card__time">Cruising</div>
+        </div>
+
+        <div class="itin-card reveal">
+          <div class="itin-card__day">Saturday · Day 3</div>
+          <div class="itin-card__date">Jul 3</div>
+          <div class="itin-card__icon">🦅</div>
+          <div class="itin-card__port">Ketchikan, AK</div>
+          <div class="itin-card__time">9:00 AM – 5:00 PM</div>
+        </div>
+
+        <div class="itin-card reveal">
+          <div class="itin-card__day">Sunday · Day 4</div>
+          <div class="itin-card__date">Jul 4</div>
+          <div class="itin-card__icon">🌲</div>
+          <div class="itin-card__port">Sitka, AK</div>
+          <div class="itin-card__time">9:00 AM – 4:00 PM</div>
+        </div>
+
+        <div class="itin-card highlight reveal">
+          <div class="itin-card__day">Monday · Day 5</div>
+          <div class="itin-card__date">Jul 5</div>
+          <div class="itin-card__icon">🧊</div>
+          <div class="itin-card__port">Tracy Arm Fjord</div>
+          <div class="itin-card__time">Glacial Cruising</div>
+        </div>
+
+        <div class="itin-card reveal">
+          <div class="itin-card__day">Tuesday · Day 6</div>
+          <div class="itin-card__date">Jul 6</div>
+          <div class="itin-card__icon">🍁</div>
+          <div class="itin-card__port">Prince Rupert, Canada</div>
+          <div class="itin-card__time">12:00 PM – 8:00 PM</div>
+        </div>
+
+        <div class="itin-card reveal">
+          <div class="itin-card__day">Wednesday · Day 7</div>
+          <div class="itin-card__date">Jul 7</div>
+          <div class="itin-card__icon">🌅</div>
+          <div class="itin-card__port">Day at Sea</div>
+          <div class="itin-card__time">Relax & Reflect</div>
+        </div>
+
+        <div class="itin-card reveal">
+          <div class="itin-card__day">Thursday · Day 8</div>
+          <div class="itin-card__date">Jul 8</div>
+          <div class="itin-card__icon">🚢</div>
+          <div class="itin-card__port">Seattle, WA</div>
+          <div class="itin-card__time">Arrives 7:00 AM</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUSIONS -->
+  <section class="section section--glacier">
+    <div class="container container--narrow">
+      <p class="section-label reveal">What's Included</p>
+      <h2 class="section__heading reveal">More Than a Cruise.<br><em style="font-family: var(--font-display); font-style: italic; color: var(--gold-light);">It's an Experience.</em></h2>
+      <div class="inclusions-grid">
+        <div class="inclusion-card reveal">
+          <div class="inclusion-card__icon">💰</div>
+          <div class="inclusion-card__text">$100 Sailor Loot to spend on board — dining, spa, excursions, your call</div>
+        </div>
+        <div class="inclusion-card reveal">
+          <div class="inclusion-card__icon">📶</div>
+          <div class="inclusion-card__text">Classic Wi-Fi included so you stay connected without the stress</div>
+        </div>
+        <div class="inclusion-card reveal">
+          <div class="inclusion-card__icon">🛳️</div>
+          <div class="inclusion-card__text">Private Sea Terrace balcony with views you won't believe are real</div>
+        </div>
+        <div class="inclusion-card reveal">
+          <div class="inclusion-card__icon">🧊</div>
+          <div class="inclusion-card__text">Front-row views of Tracy Arm Fjord — glaciers, wildlife, pure Alaska</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section section--light">
+    <div class="container container--narrow">
+      <p class="section-label reveal">Pricing</p>
+      <h2 class="section__heading reveal">Two Cabin Options.<br>Both Worth Every Penny.</h2>
+      <p class="section__body reveal">All cabins are double occupancy. Final payment due April 7, 2027.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card featured reveal">
+          <div class="price-card__label">Cabin Option 1</div>
+          <div class="price-card__name">Central Sea Terrace</div>
+          <div class="price-card__amount">$1,893</div>
+          <div class="price-card__per">Per Person</div>
+          <div class="price-card__cabin">$3,786 total per cabin</div>
+          <div class="price-card__deposit">Deposit ~$313/person</div>
+          <div class="price-card__deposit-sub">$625.60 per cabin · due within 24 hrs</div>
+        </div>
+        <div class="price-card reveal">
+          <div class="price-card__label">Cabin Option 2</div>
+          <div class="price-card__name">Sea Terrace</div>
+          <div class="price-card__amount">$1,861</div>
+          <div class="price-card__per">Per Person</div>
+          <div class="price-card__cabin">$3,722 total per cabin</div>
+          <div class="price-card__deposit">Deposit ~$310/person</div>
+          <div class="price-card__deposit-sub">$612.80 per cabin · due within 24 hrs</div>
+        </div>
+      </div>
+
+      <p class="price-note reveal">
+        All cabins are double occupancy.<br>
+        <strong>Need something different?</strong> Mention it in the notes and I'll reach out directly.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW TO BOOK -->
+  <section class="section section--cream">
+    <div class="container">
+      <p class="section-label reveal" style="text-align:center;">How It Works</p>
+      <h2 class="section__heading reveal" style="text-align:center;">Three Simple Steps</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step__num">1</div>
+          <div class="step__title">Fill Out the Form</div>
+          <div class="step__body">Tell me which cabin you want and who's coming. Takes 2 minutes.</div>
+        </div>
+        <div class="step reveal">
+          <div class="step__num">2</div>
+          <div class="step__title">Pay Your Deposit</div>
+          <div class="step__body">Deposit is due within 24 hours of booking. I'll send you payment details right away.</div>
+        </div>
+        <div class="step reveal">
+          <div class="step__num">3</div>
+          <div class="step__title">Pack for Alaska</div>
+          <div class="step__body">I handle everything else. You just show up ready for the last frontier.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- URGENCY -->
+  <div class="urgency">
+    <div class="container container--narrow">
+      <p class="urgency__headline reveal">Final Payment Due April 7, 2027.</p>
+      <p class="urgency__sub reveal">Don't let this one slip. Cabins go fast and this route sells out.</p>
+      <div class="reveal">
+        <a href="#inquiry" class="btn-gold">Claim Your Cabin</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <section class="inquiry-section" id="inquiry">
+    <div class="container">
+      <p class="section-label reveal" style="text-align:center;">Ready to Go?</p>
+      <div class="form-card reveal">
+        <h2 class="form-card__title">Let's Make It Happen</h2>
+        <p class="form-card__sub">Fill this out and I'll be in touch within 24 hours with next steps and your deposit info.</p>
+
+        <form action="https://formspree.io/f/xreovegk" method="POST">
+          <input type="hidden" name="_subject" value="Alaska Last Frontier Cruise 2027 Inquiry" />
+          <input type="hidden" name="trip" value="Into the Last Frontier — Brilliant Lady, July 1–8, 2027" />
+
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="First & Last Name" required />
+            </div>
+            <div class="form-row">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(000) 000-0000" />
+            </div>
+            <div class="form-row">
+              <label for="cabin">Which Cabin?</label>
+              <select id="cabin" name="cabin" required>
+                <option value="" disabled selected>Select</option>
+                <option>Central Sea Terrace — $3,786/cabin</option>
+                <option>Sea Terrace — $3,722/cabin</option>
+                <option>Not sure yet — send me more info</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="who">Who's Coming?</label>
+            <select id="who" name="who" required>
+              <option value="" disabled selected>Select</option>
+              <option>Me and my partner (cabin for 2)</option>
+              <option>Me and a friend (cabin for 2)</option>
+              <option>Me and my spouse (cabin for 2)</option>
+              <option>A group of us (multiple cabins)</option>
+              <option>Still deciding — just want info</option>
+            </select>
+            <p class="field-note">All cabins are double occupancy. If you need a different setup, mention it in the notes below and I'll reach out directly.</p>
+          </div>
+
+          <div class="form-row">
+            <label for="questions">Anything Else?</label>
+            <textarea id="questions" name="questions" placeholder="Questions, special requests, solo traveler inquiry, or anything you want me to know..."></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-gold">Send My Inquiry</button>
+            <p>No commitment yet. I'll reach out within 24 hours with everything you need.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container container--narrow">
+      <p class="section-label reveal">Alaska · Summer 2027</p>
+      <h2 class="final-cta__heading reveal">You've Done the Caribbean.<br><em>Now Do This.</em></h2>
+      <p class="final-cta__sub reveal">Brilliant Lady · Virgin Voyages · July 1–8, 2027</p>
+      <div class="reveal">
+        <a href="#inquiry" class="btn-gold">Claim Your Cabin</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BADGE STRIP -->
+  <div class="badge-strip">
+    <div class="badge-item"><span class="badge-icon">🔞</span>Adults Only · 18+</div>
+    <div class="badge-item"><span class="badge-icon">💰</span>$100 Sailor Loot</div>
+    <div class="badge-item"><span class="badge-icon">📶</span>Wi-Fi Included</div>
+    <div class="badge-item"><span class="badge-icon">🧊</span>Glacial Fjords</div>
+    <div class="badge-item" style="color: var(--gold-light); font-family: Georgia, serif; font-style: italic; font-size: 0.9rem; letter-spacing: 0.05em;">Elite Tripps™</div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>&copy; 2027 <a href="https://www.elitetripps.com">Elite Tripps™</a> · All rights reserved · <a href="https://www.elitetripps.com">Back to Main Site</a></p>
+    <p>Prices based on double occupancy. Cabins subject to availability. Final payment due April 7, 2027. Travel in style. Arrive in luxury.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
