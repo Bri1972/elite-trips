@@ -133,7 +133,7 @@ input[type="date"] { color-scheme: light; color: #3a1a2a; }
 input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.5; }
 
 /* ── DEPOSIT TOGGLE ── */
-.deposit-toggle-row { display: flex; gap: 0.55rem; margin-bottom: 0.9rem; }
+.deposit-toggle-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-bottom: 0.9rem; }
 .dep-btn {
   flex: 1; padding: 0.75rem 0.3rem; border-radius: 10px;
   border: 2px solid rgba(245,80,122,0.18);
@@ -321,12 +321,22 @@ input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity
       <button class="dep-btn" id="dep-paid" onclick="setDepositStatus('paid')">Deposit<br>already paid</button>
     </div>
     <div id="deposit-due-fields">
-      <p class="hint" style="margin-bottom:0.5rem;">How much is the deposit and when is it due?</p>
-      <div class="input-wrap" style="margin-bottom:0.6rem;"><span class="prefix">$</span>
+      <p class="hint" style="margin-bottom:0.5rem;">How much is the deposit?</p>
+      <div class="input-wrap" style="margin-bottom:0.9rem;"><span class="prefix">$</span>
         <input type="text" class="has-prefix" id="depositAmount" inputmode="numeric" placeholder="200" />
       </div>
-      <input type="date" id="depositDueDate" />
-      <p class="hint" style="margin-top:0.45rem;">⚡ Your deposit deadline becomes your first savings milestone.</p>
+      <p class="hint" style="margin-bottom:0.5rem;">When is it due?</p>
+      <div style="display:flex; gap:0.55rem; margin-bottom:0.7rem;">
+        <button class="dep-btn active" id="ddate-specific" onclick="setDepositDateType('specific')">I have a<br>specific date</button>
+        <button class="dep-btn" id="ddate-24hrs" onclick="setDepositDateType('24hrs')">Due 24hrs<br>after booking</button>
+      </div>
+      <div id="deposit-date-picker">
+        <input type="date" id="depositDueDate" />
+        <p class="hint" style="margin-top:0.45rem;">⚡ Your deposit deadline becomes your first savings milestone.</p>
+      </div>
+      <div id="deposit-24hrs-note" style="display:none; background:rgba(78,205,196,0.08); border:2px solid rgba(78,205,196,0.25); border-radius:10px; padding:0.75rem 1rem;">
+        <p style="font-size:0.9rem; color:#2a8a84; line-height:1.55;">⚡ No date needed — just make sure you have this amount ready <strong>before</strong> you book. It'll be due the moment you commit.</p>
+      </div>
     </div>
     <div id="deposit-paid-fields" style="display:none;">
       <p class="hint" style="margin-bottom:0.5rem;">How much was the deposit you already paid?</p>
@@ -334,6 +344,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity
         <input type="text" class="has-prefix" id="depositPaid" inputmode="numeric" placeholder="200" />
       </div>
     </div>
+
   </div>
 
   <div class="field">
@@ -479,6 +490,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity
   let insuranceOn=true, depositStatus='due', chipTotal=0, calcResult={};
   const monthNames=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
+  let depositDateType = 'specific';
+
   function setDepositStatus(s){
     depositStatus=s;
     ['none','due','paid'].forEach(x=>document.getElementById('dep-'+x).classList.toggle('active',x===s));
@@ -486,6 +499,13 @@ input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity
     document.getElementById('deposit-paid-fields').style.display=s==='paid'?'block':'none';
   }
   setDepositStatus('due');
+
+  function setDepositDateType(t){
+    depositDateType=t;
+    ['specific','24hrs'].forEach(x=>document.getElementById('ddate-'+x).classList.toggle('active',x===t));
+    document.getElementById('deposit-date-picker').style.display=t==='specific'?'block':'none';
+    document.getElementById('deposit-24hrs-note').style.display=t==='24hrs'?'block':'none';
+  }
 
   function toggleInsurance(){
     insuranceOn=!insuranceOn;
@@ -533,11 +553,12 @@ input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity
     const tripCost=parseCurrency('tripCost'),alreadySaved=parseCurrency('alreadySaved'),extraSpend=chipTotal||parseCurrency('extraSpending'),monthlySav=parseCurrency('monthlySavings'),targetDate=document.getElementById('targetDate').value;
     let depositPaidAmt=0,depositDueAmt=0,depositDueDate=null;
     if(depositStatus==='paid')depositPaidAmt=parseCurrency('depositPaid');
-    else if(depositStatus==='due'){depositDueAmt=parseCurrency('depositAmount');depositDueDate=document.getElementById('depositDueDate').value;}
+    else if(depositStatus==='due'){depositDueAmt=parseCurrency('depositAmount');depositDueDate=depositDateType==='specific'?document.getElementById('depositDueDate').value:null;}
+
     const insuranceAmt=insuranceOn?tripCost*0.08:0,totalCost=tripCost+insuranceAmt+extraSpend,alreadyHave=alreadySaved+depositPaidAmt,amountNeeded=Math.max(totalCost-alreadyHave,0),progressPct=Math.min(Math.round((alreadyHave/totalCost)*100),100);
     const today=new Date(),target=new Date(targetDate),msPerMonth=1000*60*60*24*30.44,monthsAvail=Math.max(Math.round((target-today)/msPerMonth),0),monthsToSave=monthlySav>0?Math.ceil(amountNeeded/monthlySav):Infinity;
     let depositUrgency=null;
-    if(depositStatus==='due'&&depositDueDate&&depositDueAmt>0){const depDate=new Date(depositDueDate),mAway=Math.max(Math.round((depDate-today)/msPerMonth),0),canCover=(mAway*monthlySav+alreadyHave)>=depositDueAmt,mNeeded=mAway>0?Math.ceil((depositDueAmt-alreadyHave)/mAway):depositDueAmt;depositUrgency={amt:depositDueAmt,monthsAway:mAway,date:depositDueDate,canCover,monthlyNeeded:mNeeded};}
+    if(depositStatus==='due'&&depositDueAmt>0){if(depositDateType==='24hrs'){depositUrgency={amt:depositDueAmt,monthsAway:0,date:null,canCover:alreadyHave>=depositDueAmt,monthlyNeeded:depositDueAmt,is24hrs:true};}else if(depositDueDate){const depDate=new Date(depositDueDate),mAway=Math.max(Math.round((depDate-today)/msPerMonth),0),canCover=(mAway*monthlySav+alreadyHave)>=depositDueAmt,mNeeded=mAway>0?Math.ceil((depositDueAmt-alreadyHave)/mAway):depositDueAmt;depositUrgency={amt:depositDueAmt,monthsAway:mAway,date:depositDueDate,canCover,monthlyNeeded:mNeeded,is24hrs:false};}}
     const milestones=[],depDate2=depositDueDate?new Date(depositDueDate):null;let running=alreadyHave;
     for(let i=1;i<=Math.max(monthsToSave===Infinity?24:monthsToSave,monthsAvail,12);i++){const d=new Date(today.getFullYear(),today.getMonth()+i,1);running+=monthlySav;const isDepMonth=depDate2&&d.getMonth()===depDate2.getMonth()&&d.getFullYear()===depDate2.getFullYear()&&depositStatus==='due';milestones.push({label:`${monthNames[d.getMonth()]} ${d.getFullYear()}`,total:Math.round(running),hit:Math.round(running)>=Math.round(amountNeeded),isDepositMonth:isDepMonth});}
     let verdict,message,scenarios;
@@ -560,7 +581,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity
     const banner=document.getElementById('verdict-banner');banner.style.background=v.bg;banner.style.border=`2px solid ${v.border}`;banner.style.borderRadius='16px';
     document.getElementById('verdict-emoji').textContent=v.emoji;const te=document.getElementById('verdict-title');te.textContent=v.label;te.style.color=v.color;
     const vm=document.getElementById('verdict-message');vm.textContent=r.message;vm.style.color=v.msgColor;
-    if(r.depositUrgency){const du=r.depositUrgency;document.getElementById('deposit-alert').style.display='block';document.getElementById('deposit-alert-text').textContent=du.canCover?`Your $${du.amt.toLocaleString()} deposit is due in ${du.monthsAway} month${du.monthsAway!==1?'s':''}. ✅ At your savings rate you can cover it — just set that money aside first.`:`Your $${du.amt.toLocaleString()} deposit is due in ${du.monthsAway} month${du.monthsAway!==1?'s':''}. ⚠️ You'll need to save at least $${du.monthlyNeeded.toLocaleString()}/month to cover it on time. This is your FIRST priority.`;}else document.getElementById('deposit-alert').style.display='none';
+    if(r.depositUrgency){const du=r.depositUrgency;document.getElementById('deposit-alert').style.display='block';document.getElementById('deposit-alert-text').textContent=du.is24hrs?(du.canCover?`Your $${du.amt.toLocaleString()} deposit is due within 24hrs of booking. ✅ You already have enough saved to cover it — you're good to book!`:`Your $${du.amt.toLocaleString()} deposit is due within 24hrs of booking. ⚠️ You don't have this amount saved yet. Build this up FIRST before you book.`):(du.canCover?`Your $${du.amt.toLocaleString()} deposit is due in ${du.monthsAway} month${du.monthsAway!==1?'s':''}. ✅ At your savings rate you can cover it — just set that money aside first.`:`Your $${du.amt.toLocaleString()} deposit is due in ${du.monthsAway} month${du.monthsAway!==1?'s':''}. ⚠️ You'll need to save at least $${du.monthlyNeeded.toLocaleString()}/month to cover it on time. This is your FIRST priority.`);}else document.getElementById('deposit-alert').style.display='none';
     document.getElementById('stat-total').textContent=`$${r.totalCost.toLocaleString()}`;document.getElementById('stat-needed').textContent=`$${r.amountNeeded.toLocaleString()}`;document.getElementById('stat-months-avail').textContent=`${r.monthsAvail} mo`;document.getElementById('stat-months-save').textContent=r.monthsToSave===Infinity?'∞':`${r.monthsToSave} mo`;
     document.getElementById('progress-pct').textContent=`${r.progressPct}%`;document.getElementById('progress-fill').style.width=`${r.progressPct}%`;document.getElementById('progress-fill').style.background=`linear-gradient(90deg, #F5507A, #4ECDC4)`;document.getElementById('prog-have').textContent=`$${r.alreadyHave.toLocaleString()}`;document.getElementById('prog-total').textContent=`$${r.totalCost.toLocaleString()}`;
     if(r.scenarios&&r.scenarios.length){document.getElementById('scenarios-wrap').style.display='block';document.getElementById('scenarios-list').innerHTML=r.scenarios.map((s,i)=>`<div class="scenario-item"><div class="scenario-num">Option ${i+1}</div><div class="scenario-text">${s}</div></div>`).join('');}
@@ -583,7 +604,7 @@ input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity
     document.getElementById('result-view').style.display='none';document.getElementById('form-view').style.display='block';document.getElementById('gate-section').style.display='block';document.getElementById('milestones-section').style.display='none';document.getElementById('scenarios-wrap').style.display='none';
     document.getElementById('gate-name').value='';document.getElementById('gate-email').value='';document.getElementById('btn-gate').className='btn-gate inactive';document.getElementById('btn-gate').textContent='Send My Plan ✨';
     chipKeys.forEach(key=>{const btn=document.querySelector(`#chip-${key} .chip`);if(btn)btn.classList.remove('selected');const wrap=document.getElementById(`chip-input-${key}`);if(wrap)wrap.style.display='none';const val=document.getElementById(`chip-val-${key}`);if(val)val.value='';});
-    chipTotal=0;document.getElementById('chip-total').style.display='none';document.getElementById('extraSpending').value='0';setDepositStatus('due');window.scrollTo({top:0,behavior:'smooth'});
+    chipTotal=0;document.getElementById('chip-total').style.display='none';document.getElementById('extraSpending').value='0';setDepositStatus('due');setDepositDateType('specific');window.scrollTo({top:0,behavior:'smooth'});
   }
 </script>
 
